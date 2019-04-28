@@ -8,6 +8,8 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    var random: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,8 +21,19 @@ class MainActivity : AppCompatActivity() {
             rollDice()}
     }
 
+    private fun generateNum() = Random().nextInt(6) + 1
+
     private fun rollDice() {
-        val randomInt = Random().nextInt(6) + 1
-        result_text.text = "$randomInt"
+        random = generateNum()
+
+        val drawableResource = when(random) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
+        }
+        dice_image.setImageDrawable(getDrawable(drawableResource))
     }
 }
